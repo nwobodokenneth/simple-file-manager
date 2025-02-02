@@ -1,15 +1,23 @@
-# File manger app
-This README will guide you through the steps to set up and run the project
+# File and Folder Viewer
 
-# Installation guide
-1. git clone https://github.com/nwobodokenneth/simple-file-manager.git
-2. cd simple-file-manager
-3. npm install
+## Instructions to Run the Application
 
+1. Clone the repository.
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
+3. Run the application:
+    ```bash
+    npm run dev
+    ```
+4. Open `http://localhost:3000` in your browser.
 
-# Run project
-npm run dev
+## Testing
 
-# Run test
-npm run test
-
+To run tests:
+1. Ensure dependencies are installed.
+2. Run the tests with:
+    ```bash
+    npm run test
+    ```
