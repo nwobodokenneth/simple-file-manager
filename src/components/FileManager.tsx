@@ -14,8 +14,8 @@ const FileManager: React.FC = () => {
 
 
    const handleFolderClick = (folder: FolderItem) => {
-      setHistory([...history, currentItems]);
       setCurrentItems(folder.files);
+      setHistory([...history, currentItems]);
       setCurrentFolderNAme(folder.name)
    };
 
@@ -25,13 +25,10 @@ const FileManager: React.FC = () => {
    }
 
    const handleBackClick = () => {
-      console.log('start')
       if (history.length === 0) return;
       const previousItems = history[history.length - 1];
       setHistory(history.slice(0, -1));
       setCurrentItems(previousItems);
-      console.log('stop')
-
    };
 
    const filteredItems = currentItems.filter((item: FileSystemItem) =>
@@ -57,7 +54,6 @@ const FileManager: React.FC = () => {
                   <span className="text-3xl font-bold text-gray-800">File Manager</span>
                </button>
 
-            {/*<span className="text-3xl font-bold text-gray-800 mb-4">File Manager</span>*/}
             {history.length > 0 && (
                <div className={'flex items-center'}>
                   <ChevronRight/>
