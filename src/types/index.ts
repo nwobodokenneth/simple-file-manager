@@ -1,14 +1,17 @@
-// types/types.ts
-export interface FileItem {
+export interface BaseItem {
    type: string;
    name: string;
+}
+
+export interface FileItem extends BaseItem {
+   type: string;
    added: string;
 }
 
-export interface FolderItem {
+export interface FolderItem extends BaseItem {
    type: 'folder';
-   name: string;
-   files: File[];
+   files: FileItem[];
+   added: string;
 }
 
-export type File = FileItem | FolderItem;
+export type FileSystemItem = FileItem | FolderItem;

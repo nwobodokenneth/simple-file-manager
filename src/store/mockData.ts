@@ -1,6 +1,5 @@
-// data/data.ts
-import {File} from "../types";
-export const mockData: DocumentItem[] = [
+import {FileSystemItem} from "../types";
+export const mockData: FileSystemItem[] = [
    {
       type: "pdf",
       name: "Employee Handbook",
@@ -9,7 +8,7 @@ export const mockData: DocumentItem[] = [
    {
       type: "pdf",
       name: "Public Holiday policy",
-      added: "2016-12-06"
+      added: "2014-12-06"
    },
    {
       type: "folder",
@@ -17,12 +16,13 @@ export const mockData: DocumentItem[] = [
       files: [
          { type: "doc", name: "Expenses claim form", added: "2017-05-02" },
          { type: "doc", name: "Fuel allowances", added: "2017-05-03" }
-      ]
+      ],
+      added: "2016-12-06"
    },
    {
       type: "csv",
       name: "Cost centres",
-      added: "2016-08-12"
+      added: "2012-08-12"
    },
    {
       type: "folder",
@@ -30,6 +30,7 @@ export const mockData: DocumentItem[] = [
       files: [
          { type: "doc", name: "Christmas party", added: "2017-12-01" },
          { type: "mov", name: "Welcome to the company!", added: "2015-04-24" }
-      ]
+      ],
+      added: "2015-12-06"
    }
 ];

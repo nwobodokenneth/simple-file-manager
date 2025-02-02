@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import FileManager from "./components/fileManager";
+import FileManager from "./components/FileManager";
 
 function App() {
 
