@@ -15,3 +15,8 @@ export interface FolderItem extends BaseItem {
 }
 
 export type FileSystemItem = FileItem | FolderItem;
+
+export type SortOption = {
+   label: string;
+   value: string;
+};

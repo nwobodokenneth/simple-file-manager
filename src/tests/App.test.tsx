@@ -58,7 +58,7 @@ describe('File Manager', () => {
       const folderButton = screen.getByText(name);
       fireEvent.click(folderButton);
 
-      const backButton = screen.getByText('Back');
+      const backButton = screen.getByText('File Manager');
       fireEvent.click(backButton);
 
       mockData.forEach(item => {

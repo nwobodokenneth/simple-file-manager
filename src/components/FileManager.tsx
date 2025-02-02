@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import {FileSystemItem, FolderItem} from '../types';
 import {mockData} from "../store/mockData";
 import {Folder, FileText, Film, Search, ChevronRight} from "react-feather"
+import SortDropdown from "./SortDropdown";
+import _ from "lodash";
 
 
 
@@ -9,8 +11,8 @@ const FileManager: React.FC = () => {
 
    const [history, setHistory] = useState<FileSystemItem[][]>([]);
    const [currentItems, setCurrentItems] = useState<FileSystemItem[]>(mockData);
-   const [filterText, setFilterText] = useState('');
-   const [currentFolderName, setCurrentFolderNAme] = useState('');
+   const [filterText, setFilterText] = useState<string>('');
+   const [currentFolderName, setCurrentFolderNAme] = useState<string>('');
 
 
    const handleFolderClick = (folder: FolderItem) => {
@@ -43,6 +45,9 @@ const FileManager: React.FC = () => {
       });
    }
 
+   const handleSort = (item, order) => {
+      setCurrentItems(_.orderBy(filteredItems, [item], [order])); // Uses lodash's orderBy for dynamic sorting
+   }
 
    return (
       <div className="w-3/5 mx-auto p-6">
@@ -62,7 +67,7 @@ const FileManager: React.FC = () => {
             )}
          </div>
 
-         <div className="flex">
+         <div className="flex gap-3 items-center">
             <input
                type="text"
                placeholder="Filter by filename"
@@ -70,6 +75,7 @@ const FileManager: React.FC = () => {
                onChange={(e) => setFilterText(e.target.value)}
                className="flex-grow p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            <SortDropdown onSortChange={handleSort}/>
 
          </div>
          <div className={'space-y-4'}>
