@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {FileSystemItem, FolderItem} from '../types';
 import {mockData} from "../store/mockData";
-import {Folder, FileText, Film, Search} from "react-feather"
+import {Folder, FileText, Film, Search, ChevronRight} from "react-feather"
 
 
 
@@ -25,35 +25,48 @@ const FileManager: React.FC = () => {
    }
 
    const handleBackClick = () => {
+      console.log('start')
       if (history.length === 0) return;
       const previousItems = history[history.length - 1];
       setHistory(history.slice(0, -1));
       setCurrentItems(previousItems);
+      console.log('stop')
+
    };
 
    const filteredItems = currentItems.filter((item: FileSystemItem) =>
       item.name?.toLowerCase().includes(filterText.trim().toLowerCase())
    );
 
+   const dateFormat = (date: Date) => {
+      return new Date(date).toLocaleDateString('en-GB', {
+         day: 'numeric',
+         month: 'short',
+         year: 'numeric'
+      });
+   }
+
 
    return (
       <div className="w-3/5 mx-auto p-6">
-         <div className={'mb-3'}>
-            <span className="text-3xl font-bold text-gray-800 mb-4">File Manager</span>
+         <div className={'mb-3 flex'}>
+               <button
+                  onClick={history.length > 0 ? handleBackClick : undefined}
+                  className={`${history.length > 0 && 'cursor-pointer hover:bg-gray-200 px-2 -ml-3 rounded-lg'} py-2 text-white`}
+               >
+                  <span className="text-3xl font-bold text-gray-800">File Manager</span>
+               </button>
+
+            {/*<span className="text-3xl font-bold text-gray-800 mb-4">File Manager</span>*/}
             {history.length > 0 && (
-               <span className="text-3xl font-thin text-gray-800 mb-4"> / {currentFolderName}</span>
+               <div className={'flex items-center'}>
+                  <ChevronRight/>
+                  <span className="text-3xl font-thin text-gray-800"> {currentFolderName}</span>
+               </div>
             )}
          </div>
 
-         <div className="flex gap-6">
-            {history.length > 0 && (
-               <button
-                  onClick={handleBackClick}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-               >
-                  Back
-               </button>
-            )}
+         <div className="flex">
             <input
                type="text"
                placeholder="Filter by filename"
@@ -86,21 +99,19 @@ const FileManager: React.FC = () => {
                      <div
                         key={index}
                      >
-                        <div className={`${item.type === 'folder' && 'cursor-pointer'} p-10 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors mt-10`}
+                        <button className={`${item.type === 'folder' && 'cursor-pointer'} p-10 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors mt-8 w-full`}
                              onClick={item.type === 'folder' ? () => handleFolderClick(item) : undefined}
                         >
-                           <div className="flex items-center gap-4">
-                              {fileType[item.type] ?? <FileText/>}
-                              <span className={`${item.type === 'folder' && 'hover:underline underline-offset-4'} flex-grow text-gray-900`}>{item.name}{`${item.type !== "folder" ? `.${item.type}` : ''}`}</span>
-                              <span className="text-sm text-gray-500">
-                                    {new Date(item.added).toLocaleDateString('en-GB', {
-                                       day: 'numeric',
-                                       month: 'short',
-                                       year: 'numeric'
-                                    })}
-                        </span>
+                           <div className="flex items-center justify-between gap-4">
+                              <div className={'flex items-center gap-2'}>
+                                 {fileType[item.type] ?? <FileText/>}
+                                 <span className={`${item.type === 'folder' && 'hover:underline underline-offset-4'} flex-grow text-gray-900`}>{item.name}{`${item.type !== "folder" ? `.${item.type}` : ''}`}</span>
+                              </div>
+                                  <span className="text-sm text-gray-500">
+                                    {dateFormat(item.added)}
+                              </span>
                            </div>
-                        </div>
+                        </button>
                      </div>
                   ))
             )}
