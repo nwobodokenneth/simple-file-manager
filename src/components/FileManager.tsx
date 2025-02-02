@@ -6,6 +6,7 @@ import {Folder, FileText, Film, Search} from "react-feather"
 
 
 const FileManager: React.FC = () => {
+
    const [history, setHistory] = useState<FileSystemItem[][]>([]);
    const [currentItems, setCurrentItems] = useState<FileSystemItem[]>(mockData);
    const [filterText, setFilterText] = useState('');
